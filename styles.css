@@ -24,20 +24,20 @@ body {
 img { max-width: 100%; height: auto; }
 .inner { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
 .masthead {
-  padding: 0.75rem 0 0.25rem;
+  border-bottom: 3px double var(--ink);
+  padding: 1.5rem 0 1rem;
   text-align: center;
   margin-bottom: 1.25rem;
 }
-.logo { margin: 0; font-size: 1rem; font-weight: 400; }
-.logo a { display: block; color: inherit; text-decoration: none; }
-.logo img {
-  display: block;
-  width: min(520px, 100%);
-  max-width: 100%;
-  height: auto;
-  aspect-ratio: 698 / 449;
-  margin: 0 auto;
+.logo {
+  margin: 0;
+  font-family: "LXGW WenKai TC", "Iowan Old Style", "Songti TC", serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
 }
+.logo a { color: inherit; text-decoration: none; }
 .issue-date { text-align: center; color: var(--muted); margin: 0 0 1.5rem; }
 .columns {
   display: grid;
