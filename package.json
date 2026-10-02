@@ -1,0 +1,14 @@
+{
+  "name": "cultivation-daily",
+  "version": "1.0.0",
+  "description": "私人修養日報 — Personal Cultivation Daily",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
+}
