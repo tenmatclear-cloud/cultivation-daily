@@ -29,3 +29,9 @@ author: 狐狸
 ## 一週內可驗證小實驗
 
 選一條你本週真會用 agent 或筆記輔助、而且有對外或寫庫後果嘅工作流（例如回覆合作方報價、整理競品數字、更新共享知識庫一頁）。規則：由即日起連續七個日曆日，凡你採納並執行（發出訊息、改共享檔、寫入 durable memory、或觸發付費／合併）嘅可行動主張，必須帶齊三欄出處標；缺標則改寫成「假設／待查」或延後執行。每日結束只記兩個整數：當日採納句總數、其中完整出處標句數；另用一行筆記記下「改標事件」（原本當直接引用、標完先改成壓縮／推斷／待核）。唔計未採納嘅草稿，避免分子分母灌水。成功標準：**連續五個工作日，採納並執行嘅可行動主張出處標完整率 ≥ 90%，且至少出現兩次改標事件**——有改標先證明閘攔截到真實風險，而唔係只係多打咗幾個括號。若五日內零改標但完整率達標，延長三日並刻意抽查兩條「看起來好肯定」嘅句子對 raw 來源，確認唔係格式合規、實質空轉。
+
+## 註腳／參考
+
+1. Bihui Yu et al., “TRACER: Verifiable Generative Provenance for Multimodal Tool-Using Agents,” arXiv:2605.09934；提出 provenance gap（工具軌跡有、句級主張—觀察依賴結構缺），並以 Quotation／Compression／Inference 三類關係於生成當下綁定結構化出處；TRACE-Bench 亦顯示單純加工具可引入噪音。[https://arxiv.org/abs/2605.09934](https://arxiv.org/abs/2605.09934)
+2. Yongsik Seo et al., “Verified Misguidance: Measuring Structural Citation Failures in Search-Augmented LLMs,” arXiv:2605.28565；CiteTrace 以意圖—目的對齊、來源適配、答案—來源保真度三維衡量「真引用仍可誤導」。[https://arxiv.org/abs/2605.28565](https://arxiv.org/abs/2605.28565)
+3. 捏造／未見 raw 仍宣稱工具執行之風險，可見工具收據與幻覺檢測討論，例如 “Tool Receipts, Not Zero-Knowledge Proofs: Practical Hallucination Detection for AI Agents,” arXiv:2603.10060。[https://arxiv.org/abs/2603.10060](https://arxiv.org/abs/2603.10060)
