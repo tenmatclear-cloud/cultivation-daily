@@ -66,14 +66,14 @@ function layout({ title, body, activeDate }) {
   <div class="inner">
     <p class="kicker">Private Cultivation Daily</p>
     <h1 class="logo"><a href="${href("/")}">私人修養日報</a></h1>
-    <p class="tagline">兩欄・每日自動上線・唔經審稿</p>
+    <p class="tagline">兩欄・每日編審後上線</p>
   </div>
 </header>
 <main class="inner">
 ${body}
 </main>
 <footer class="site-foot inner">
-  <p>小王子 · 狐狸　｜　出稿約 08:00（香港時間）</p>
+  <p>小王子 · 狐狸 · 地理學家編審　｜　出稿後編審再上站</p>
 </footer>
 </body>
 </html>`;
