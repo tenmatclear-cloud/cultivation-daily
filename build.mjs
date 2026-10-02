@@ -59,21 +59,24 @@ function layout({ title, body, activeDate }) {
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>${title}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC&family=Noto+Sans+HK:wght@400;500;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="${href("/styles.css")}"/>
 </head>
 <body>
 <header class="masthead">
   <div class="inner">
-    <p class="kicker">Private Cultivation Daily</p>
-    <h1 class="logo"><a href="${href("/")}">私人修養日報</a></h1>
-    <p class="tagline">兩欄・每日編審後上線</p>
+    <h1 class="logo"><a href="${href("/")}">
+      <img src="${href("/masthead.png")}" alt="B612 Daily"/>
+    </a></h1>
   </div>
 </header>
 <main class="inner">
 ${body}
 </main>
 <footer class="site-foot inner">
-  <p>小王子 · 狐狸 · 地理學家編審　｜　出稿後編審再上站</p>
+  <p>© 2026 TenmaWong Studio. SeeThinkMake</p>
 </footer>
 </body>
 </html>`;
@@ -81,7 +84,7 @@ ${body}
 
 function dayPage(date, prince, fox) {
   return layout({
-    title: `${date}｜私人修養日報`,
+    title: `${date}｜B612日報`,
     activeDate: date,
     body: `
 <nav class="crumb"><a href="${href("/")}">今日</a> · <a href="${href("/archive.html")}">過往</a> · <span>${date}</span></nav>
@@ -108,7 +111,7 @@ function dayPage(date, prince, fox) {
 function indexPage(latest, prince, fox, dates) {
   const others = dates.filter((d) => d !== latest).slice(0, 7);
   return layout({
-    title: "私人修養日報",
+    title: "B612日報",
     activeDate: latest,
     body: `
 <p class="issue-date">今日／最新　<strong>${latest}</strong></p>
@@ -141,7 +144,7 @@ ${
 
 function archivePage(dates) {
   return layout({
-    title: "過往｜私人修養日報",
+    title: "過往｜B612日報",
     body: `
 <nav class="crumb"><a href="${href("/")}">今日</a> · <span>過往</span></nav>
 <h2 class="page-title">過往刊號</h2>
@@ -162,6 +165,7 @@ if (!dates.length) {
 
 const css = fs.readFileSync(path.join(__dirname, "styles.css"), "utf8");
 fs.writeFileSync(path.join(OUT, "styles.css"), css);
+fs.copyFileSync(path.join(__dirname, "masthead.png"), path.join(OUT, "masthead.png"));
 
 for (const date of dates) {
   const prince = readArticle(date, "prince.md");
