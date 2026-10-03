@@ -1,0 +1,15 @@
+{
+  "week": "YYYY-Www",
+  "week_start": "YYYY-MM-DD",
+  "week_end": "YYYY-MM-DD",
+  "proposition": "一句本週命題",
+  "angles": {
+    "哲學": "本週可切入嘅哲學角度",
+    "心理學": "本週可切入嘅心理學角度",
+    "科學": "本週可切入嘅科學角度"
+  },
+  "status": "proposed",
+  "created_by": "地理學家",
+  "created_at": "ISO-8601+08:00",
+  "notes": "用戶可否決；否決後改寫再 proposed"
+}
