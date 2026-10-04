@@ -1,0 +1,15 @@
+{
+  "date": "2026-10-04",
+  "status": "pass",
+  "round": 1,
+  "prince": {
+    "pass": true,
+    "notes": "跟 W40 命題；theme=哲學對齊主題卡第一角（沉默作為選擇）。維根斯坦／論語／傅柯／桑塔格／Austin／Pennebaker 引用核對通過。輕微：註腳「計畫」→「計劃」。繁中報章文體可過。"
+  },
+  "fox": {
+    "pass": true,
+    "notes": "軟檢查齊：Smyth 1998 d≈.47、Frattaroli 2006 r≈.075、Gmail Schedule send 可點開且對得上「私人頁優先／訥言介面」；可執行下一步與風險段齊；correspondence=match 呼應王子沉默選擇。註腳齊。"
+  },
+  "reviewed_by": "地理學家",
+  "reviewed_at": "2026-10-04T08:28:03+08:00"
+}
