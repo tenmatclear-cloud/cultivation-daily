@@ -9,6 +9,7 @@
 /home/box/cultivation-daily/content/YYYY-MM-DD/prince.md
 /home/box/cultivation-daily/content/YYYY-MM-DD/fox.md
 /home/box/cultivation-daily/content/YYYY-MM-DD/editorial.json
+/home/box/cultivation-daily/content/YYYY-MM-DD/figures.json  # 過關後虛榮師插圖
 ```
 
 日期／週次用 Asia/Hong_Kong。`YYYY-Www` 為 ISO 週（例：2026-W40）。
@@ -63,6 +64,14 @@ correspondence: match | blank   # match=對應驗證／應用；blank=對應空�
 **狐狸加：** 上列四項軟檢查；來源對唔上論點＝不過。
 
 `status`：`pass`｜`revise`｜`fail`（兩輪制同前）。同步只認 `pass` 且兩邊 `pass=true`。
+
+## 插圖 `figures.json`
+
+編審閘過關之後，虛榮師先唔改 `prince.md`，而係喺當日資料夾寫 `figures.json`，同圖片檔放埋一齊。範本見 `_templates/figures.json`。Build 把每張圖插喺小王子欄、以 `after` 開頭嗰一段之後；狐狸欄同註腳唔會插圖。冇呢份檔，頁面同而家一樣。
+
+`file` 係同資料夾圖片檔名。`after` 係該段正文開頭原文，至少八個字，而且只可以對中一段（段內強調、連結、註腳標記唔計）。`align` 只係 `left` 或 `right`，其他當 `right`。`width` 只係 `40%` 至 `100%`，其他用 `66%`。冇圖說。窄屏唔浮動，闊度 100%。`date` 同資料夾唔符只警告。
+
+`after` 對唔中、短過八個字、中多過一段，或者圖片檔唔存在，嗰張圖會跳過，build log 出警告，build 仍然成功。
 
 ## 時間鏈（Asia/Hong_Kong）
 

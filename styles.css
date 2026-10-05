@@ -165,6 +165,34 @@ summary:focus-visible {
   margin-right: 1rem;
 }
 
+/* figures.json. Same float treatment as the 2026-10-05 figures; width comes from --figure-width. */
+.prose img.figure {
+  width: var(--figure-width, 66%);
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.prose img.figure.float-right {
+  float: right;
+  margin-left: 1rem;
+}
+
+.prose img.figure.float-left {
+  float: left;
+  margin-right: 1rem;
+}
+
+@media (max-width: 640px) {
+  .prose img.figure.float-left,
+  .prose img.figure.float-right {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 .prose ul,
 .prose ol {
   margin: 0 0 1rem;

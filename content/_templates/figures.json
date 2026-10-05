@@ -1,0 +1,11 @@
+{
+  "date": "YYYY-MM-DD",
+  "figures": [
+    {
+      "file": "example.jpg",
+      "after": "要插圖嗰段正文開頭原文（至少八個字）",
+      "align": "right",
+      "width": "66%"
+    }
+  ]
+}
