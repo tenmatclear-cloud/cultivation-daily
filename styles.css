@@ -148,6 +148,23 @@ summary:focus-visible {
 
 .prose p { margin: 0 0 1rem; }
 
+/* 2026-10-05 prince essay only. Other issues have no figures with this class. */
+.prose img.figure-2026-10-05 {
+  width: 66.67%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.prose img.figure-2026-10-05.float-right {
+  float: right;
+  margin-left: 1rem;
+}
+
+.prose img.figure-2026-10-05.float-left {
+  float: left;
+  margin-right: 1rem;
+}
+
 .prose ul,
 .prose ol {
   margin: 0 0 1rem;
