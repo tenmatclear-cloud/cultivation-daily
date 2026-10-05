@@ -70,22 +70,191 @@ function publishArticleImages(date) {
   }
 }
 
+function decodeAttr(value) {
+  return String(value)
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&");
+}
+
 function placeImages(html, date) {
   return html.replace(
     /(<img\b[^>]*\bsrc=")([^"]+)(")/g,
     (match, open, src, close) => {
       if (/^(?:https?:|data:|\/)/.test(src)) return match;
-      const name = path.basename(src);
-      if (!fs.existsSync(path.join(CONTENT_DIR, date, name))) return match;
+      const name = path.basename(decodeAttr(src));
+      if (!name || !fs.existsSync(path.join(CONTENT_DIR, date, name))) return match;
       return `${open}${href(`/media/${date}/${name}`)}${close}`;
     }
   );
 }
 
+function warnFigure(date, message) {
+  console.warn(`[figures] ${date}: ${message}`);
+}
+
+function paragraphPlainText(innerHtml) {
+  const decoded = decodeAttr(
+    String(innerHtml)
+      .replace(/<br\s*\/?>/gi, " ")
+      .replace(/<[^>]+>/g, "")
+  );
+  return decoded.replace(/\[\^[^\]]+\]/g, "").replace(/\s+/g, " ").trim();
+}
+
+function princeProseEnd(html) {
+  const re = /<h[1-6]\b[^>]*>[\s\S]*?<\/h[1-6]>/gi;
+  let match;
+  while ((match = re.exec(html))) {
+    const text = paragraphPlainText(match[0]);
+    if (/註腳|注腳|參考文獻|footnotes?/i.test(text)) return match.index;
+  }
+  return html.length;
+}
+
+function figureLabel(figure, index) {
+  if (figure && typeof figure.file === "string" && figure.file.trim()) {
+    return figure.file.trim();
+  }
+  return `figure ${index + 1}`;
+}
+
+function loadFigures(date) {
+  const file = path.join(CONTENT_DIR, date, "figures.json");
+  if (!fs.existsSync(file)) return null;
+  let data;
+  try {
+    const raw = fs.readFileSync(file, "utf8").replace(/^\uFEFF/, "");
+    data = JSON.parse(raw);
+  } catch (err) {
+    warnFigure(date, `figures.json is not valid JSON; skipping the file (${err.message})`);
+    return null;
+  }
+  if (!data || typeof data !== "object" || Array.isArray(data) || !Array.isArray(data.figures)) {
+    warnFigure(date, "figures.json must contain a figures array; skipping the file");
+    return null;
+  }
+  if ("date" in data && data.date !== date) {
+    warnFigure(
+      date,
+      `date ${JSON.stringify(data.date)} does not match folder ${date}`
+    );
+  }
+  return data.figures;
+}
+
+function resolveAlign(date, label, align) {
+  if (align == null || align === "") return "right";
+  if (align === "left" || align === "right") return align;
+  warnFigure(
+    date,
+    `"${label}" align ${JSON.stringify(align)} is not left or right; using right`
+  );
+  return "right";
+}
+
+function resolveWidth(date, label, width) {
+  if (width == null || width === "") return "66%";
+  const text = String(width).trim();
+  const match = text.match(/^(\d+(?:\.\d+)?)%$/);
+  const size = match ? Number(match[1]) : NaN;
+  if (!match || size < 40 || size > 100) {
+    warnFigure(
+      date,
+      `"${label}" width ${JSON.stringify(width)} is not a percentage from 40% to 100%; using 66%`
+    );
+    return "66%";
+  }
+  return `${match[1]}%`;
+}
+
+function issueImageName(file) {
+  if (typeof file !== "string") return "";
+  const name = file.trim();
+  if (!name || name !== path.basename(name) || name === "." || name === "..") return "";
+  if (!/\.(?:jpe?g|png|gif|webp)$/i.test(name)) return "";
+  return name;
+}
+
+function insertPrinceFigures(html, date) {
+  const figures = loadFigures(date);
+  if (!figures) return html;
+
+  const regionEnd = princeProseEnd(html);
+  const paragraphs = [];
+  const re = /<p\b[^>]*>[\s\S]*?<\/p>/g;
+  let match;
+  while ((match = re.exec(html.slice(0, regionEnd)))) {
+    const inner = match[0].replace(/^<p\b[^>]*>/i, "").replace(/<\/p>$/i, "");
+    paragraphs.push({
+      end: match.index + match[0].length,
+      text: paragraphPlainText(inner),
+    });
+  }
+
+  const insertions = [];
+  figures.forEach((figure, index) => {
+    const label = figureLabel(figure, index);
+    if (!figure || typeof figure !== "object" || Array.isArray(figure)) {
+      warnFigure(date, `skip ${label}: not a figure object`);
+      return;
+    }
+    const after =
+      typeof figure.after === "string"
+        ? figure.after.replace(/\s+/g, " ").trim()
+        : "";
+    if (after.length < 8) {
+      warnFigure(date, `skip "${label}": after is missing or shorter than 8 characters`);
+      return;
+    }
+    const name = issueImageName(figure.file);
+    const imagePath = name ? path.join(CONTENT_DIR, date, name) : "";
+    if (!name || !fs.existsSync(imagePath)) {
+      warnFigure(date, `skip "${label}": image file not found`);
+      return;
+    }
+    const hits = paragraphs.filter((paragraph) => paragraph.text.startsWith(after));
+    if (hits.length === 0) {
+      warnFigure(date, `skip "${label}": after "${after}" matches no prince paragraph`);
+      return;
+    }
+    if (hits.length > 1) {
+      warnFigure(
+        date,
+        `skip "${label}": after "${after}" matches ${hits.length} prince paragraphs`
+      );
+      return;
+    }
+    const align = resolveAlign(date, label, figure.align);
+    const width = resolveWidth(date, label, figure.width);
+    const tag = `<img class="figure float-${align}" src="${escapeHtml(name)}" alt="" style="--figure-width: ${width}">`;
+    insertions.push({ at: hits[0].end, html: `\n${tag}\n`, order: index });
+  });
+
+  insertions.sort((a, b) => b.at - a.at || b.order - a.order);
+  let out = html;
+  for (const insertion of insertions) {
+    out = out.slice(0, insertion.at) + insertion.html + out.slice(insertion.at);
+  }
+  return out;
+}
+
+const articleCache = new Map();
+
 function readArticle(date, file) {
+  const key = `${date}/${file}`;
+  const cached = articleCache.get(key);
+  if (cached) return cached;
   const raw = fs.readFileSync(path.join(CONTENT_DIR, date, file), "utf8");
   const { meta, body } = parseFrontmatter(raw);
-  return { meta, html: placeImages(marked.parse(body), date) };
+  let html = marked.parse(body);
+  if (file === "prince.md") html = insertPrinceFigures(html, date);
+  const article = { meta, html: placeImages(html, date) };
+  articleCache.set(key, article);
+  return article;
 }
 
 function readProposition(week) {
