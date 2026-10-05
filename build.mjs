@@ -54,10 +54,38 @@ function listDates() {
     .reverse();
 }
 
+function publishArticleImages(date) {
+  const dir = path.join(CONTENT_DIR, date);
+  let names;
+  try {
+    names = fs.readdirSync(dir);
+  } catch {
+    return;
+  }
+  for (const name of names) {
+    if (!/\.(?:jpe?g|png|gif|webp)$/i.test(name)) continue;
+    const destDir = path.join(OUT, "media", date);
+    fs.mkdirSync(destDir, { recursive: true });
+    fs.copyFileSync(path.join(dir, name), path.join(destDir, name));
+  }
+}
+
+function placeImages(html, date) {
+  return html.replace(
+    /(<img\b[^>]*\bsrc=")([^"]+)(")/g,
+    (match, open, src, close) => {
+      if (/^(?:https?:|data:|\/)/.test(src)) return match;
+      const name = path.basename(src);
+      if (!fs.existsSync(path.join(CONTENT_DIR, date, name))) return match;
+      return `${open}${href(`/media/${date}/${name}`)}${close}`;
+    }
+  );
+}
+
 function readArticle(date, file) {
   const raw = fs.readFileSync(path.join(CONTENT_DIR, date, file), "utf8");
   const { meta, body } = parseFrontmatter(raw);
-  return { meta, html: marked.parse(body) };
+  return { meta, html: placeImages(marked.parse(body), date) };
 }
 
 function readProposition(week) {
@@ -182,6 +210,7 @@ const css = fs.readFileSync(path.join(__dirname, "styles.css"), "utf8");
 fs.writeFileSync(path.join(OUT, "styles.css"), css);
 
 for (const date of dates) {
+  publishArticleImages(date);
   const prince = readArticle(date, "prince.md");
   const fox = readArticle(date, "fox.md");
   fs.writeFileSync(
