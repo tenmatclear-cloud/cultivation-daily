@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-06",
+  "figures": [
+    {
+      "file": "lecture.jpg",
+      "after": "心理學家卡廷（James Cutting）在2003年做過一個直接的測試",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "cottages.jpg",
+      "after": "2013年，梅斯金（Aaron Meskin）等四位研究者重做曝光實驗",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
