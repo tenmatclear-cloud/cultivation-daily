@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-07",
+  "figures": [
+    {
+      "file": "chick.jpg",
+      "after": "分辨雛雞雌雄的研究把這一點說得更清楚",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "redwine.jpg",
+      "after": "跟懂得的人比較，本身也有風險",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
