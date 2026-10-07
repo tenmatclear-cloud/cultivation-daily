@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-08",
+  "figures": [
+    {
+      "file": "macaque.jpg",
+      "after": "這種變化不限於語音。帕斯卡利斯",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "gramophone.jpg",
+      "after": "同年另一項研究發現，十二個月大",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
