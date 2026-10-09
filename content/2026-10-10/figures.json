@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-10",
+  "figures": [
+    {
+      "file": "chessboard.jpg",
+      "after": "西洋棋研究把這個差別量得很清楚",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "melody.jpg",
+      "after": "同一邏輯在音樂記譜裏也出現過",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
