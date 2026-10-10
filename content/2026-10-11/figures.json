@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-11",
+  "figures": [
+    {
+      "file": "jam.jpg",
+      "after": "一九九一年，威爾遜（Timothy Wilson）與斯庫勒（Jonathan Schooler）在《人格與社會心理學期刊》發表一項實驗。",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "posters.jpg",
+      "after": "兩年後，威爾遜等人用海報做了延伸。",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
