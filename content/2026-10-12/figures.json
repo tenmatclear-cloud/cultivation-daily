@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-12",
+  "figures": [
+    {
+      "file": "lab.jpg",
+      "after": "萊爾（Gilbert Ryle）在一九四九年的《心的概念》第二章",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "bricks.jpg",
+      "after": "亞里士多德在《尼各馬可倫理學》第二卷，把道德德性放在習慣一邊。",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
