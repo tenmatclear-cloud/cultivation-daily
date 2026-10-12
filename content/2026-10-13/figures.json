@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-13",
+  "figures": [
+    {
+      "file": "recall.jpg",
+      "after": "較具體的數字，可以看羅迪格與卡皮克（Roediger & Karpicke）二〇〇六年用散文段落做的實驗。",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "cards.jpg",
+      "after": "比約克、鄧洛斯基與科內爾（Bjork, Dunlosky & Kornell）二〇一三年綜述自我調節學習時，把間隔、交錯、自我測驗、變換條件這類操弄稱為理想困難：",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
