@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-15",
+  "figures": [
+    {
+      "file": "faces.jpg",
+      "after": "博蘭尼（Michael Polanyi）在一九六六年的《默會之維》第一章寫道",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "cane.jpg",
+      "after": "博蘭尼把默會認識寫成「從—到」結構。",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
