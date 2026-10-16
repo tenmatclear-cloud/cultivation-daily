@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-17",
+  "figures": [
+    {
+      "file": "desk.jpg",
+      "after": "二〇一〇年，歐文、漢普夏、格蘭等人（Owen, Hampshire, Grahn et al.）在《自然》發表「把腦力訓練放上測驗台」。",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "grid.jpg",
+      "after": "工作記憶訓練的綜合與對照實驗，把同一邊界寫得更清楚。",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
