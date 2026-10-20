@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-21",
+  "figures": [
+    {
+      "file": "basins.jpg",
+      "after": "托馬斯・錢伯林在一八九〇年於《科學》發表",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "shelves.jpg",
+      "after": "於是我得到今天的發現。面對兩個都說得通的競爭解釋",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
