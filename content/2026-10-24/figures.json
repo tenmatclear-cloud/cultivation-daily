@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-24",
+  "figures": [
+    {
+      "file": "scales.jpg",
+      "after": "赤池弘次在一九七三年〈資訊理論與最大似然原理的擴展〉裏",
+      "align": "right",
+      "width": "66%"
+    },
+    {
+      "file": "twofold.jpg",
+      "after": "於是我得到今天的發現。面對兩個都說得通、且對同一批資料都擬合得通的競爭解釋",
+      "align": "left",
+      "width": "66%"
+    }
+  ]
+}
