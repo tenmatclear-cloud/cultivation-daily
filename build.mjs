@@ -54,6 +54,33 @@ function listDates() {
     .reverse();
 }
 
+function copyExplainers() {
+  const root = path.join(__dirname, "explainers");
+  if (!fs.existsSync(root)) return 0;
+  const destRoot = path.join(OUT, "explainers");
+  let copied = 0;
+
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const src = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        walk(src);
+        continue;
+      }
+      if (!entry.isFile() || !/\.html$/i.test(entry.name)) continue;
+      const rel = path.relative(root, src);
+      if (!rel || rel.startsWith("..") || path.isAbsolute(rel)) continue;
+      const dest = path.join(destRoot, rel);
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.copyFileSync(src, dest);
+      copied += 1;
+    }
+  }
+
+  walk(root);
+  return copied;
+}
+
 function publishArticleImages(date) {
   const dir = path.join(CONTENT_DIR, date);
   let names;
@@ -398,5 +425,10 @@ fs.writeFileSync(path.join(OUT, "archive.html"), archivePage(dates));
 // For GitHub project Pages: also write 404 → index
 fs.writeFileSync(path.join(OUT, "404.html"), indexHtml);
 
+const explainerCount = copyExplainers();
+
 console.log(`Built ${dates.length} issue(s). Latest: ${latest}`);
+if (explainerCount) {
+  console.log(`Copied ${explainerCount} explainer page(s).`);
+}
 console.log(`Out: ${OUT}`);
