@@ -28,6 +28,14 @@ python3 -m http.server 8765 --directory dist
 3. 同步 content 後 push `main`；workflow 會 build 並上線
 4. URL：`https://<user>.github.io/cultivation-daily/`
 
+## 解說頁
+
+獨立 HTML 放在 repo 根目錄 `explainers/`（可含子資料夾）。Build 只把 `.html` 原樣複製到 `dist/explainers/`，檔名同相對路徑不變，唔會改報章刊號嘅生成。
+
+公開網址係網站根加 `dist/` 入面嘅路徑，例如 `explainers/some-page.html`：
+
+`https://tenmatclear-cloud.github.io/cultivation-daily/explainers/some-page.html`
+
 同步指令：
 
 ```bash
